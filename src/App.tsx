@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useRef } from 'react';
 import './App.css';
+import { createTextbusEditor } from './textbus/editor';
+import { boldFormatter, Editor } from '@textbus/editor';
+import { Commander } from '@textbus/core';
 
 function App() {
+  const editorHost = useRef<any>()
+
+  let editor: Editor
+
+  useEffect(() => {
+    editor = createTextbusEditor(editorHost.current!)
+    editor.onChange.subscribe(() => {
+      console.log(editor.getJSON().content)
+    })
+    return () => {
+      editor.destroy()
+    }
+  })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="toolbar">
+        <button type="button" onClick={() => {
+          const commander = editor.injector!.get(Commander)
+          commander.insert('xxx')
+        }}>插入字符</button>
+
+        <button type="button" onClick={() => {
+          const commander = editor.injector!.get(Commander)
+          commander.applyFormat(boldFormatter, true)
+        }}>加粗</button>
+      </div>
+      <div style={{
+        width: '600px',
+        margin: '0 auto'
+      }} ref={editorHost}/>
     </div>
   );
 }
