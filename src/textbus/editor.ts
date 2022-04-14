@@ -1,4 +1,4 @@
-import { createEditor, defaultComponentLoaders, Toolbar, defaultTools } from '@textbus/editor';
+import { createEditor, defaultComponentLoaders, Toolbar, defaultTools, boldTool } from '@textbus/editor';
 import '@textbus/editor/bundles/textbus.min.css'
 import { alertComponentLoader } from './components/alert/alert.component';
 import { alertTool } from './components/alert/alert.tool';
@@ -10,10 +10,6 @@ defaultComponentLoaders.unshift(alertComponentLoader)
 export function createTextbusEditor(host: HTMLElement) {
   return createEditor(host, {
     plugins: [
-      new Toolbar([
-        ...defaultTools,
-        alertTool
-      ]),
       new AtPlugin()
     ]
   })

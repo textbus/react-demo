@@ -1,5 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx VElement.createElement */
 import {
   ComponentData,
   ComponentInstance,
@@ -57,7 +55,6 @@ export const atComponent = defineComponent({
               slotRender(slots.get(0)!, () => {
                 return <span/>
               })
-
             }
             <span style={{
               position: 'relative'
