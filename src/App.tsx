@@ -6,9 +6,14 @@ import { Toolbar } from './toolbar/toolbar';
 function App() {
   const test = undefined
   return (
-    <TextbusEditor>
-      <Toolbar/>
-    </TextbusEditor>
+    <div style={{
+      width: '800px',
+      margin: '20px auto'
+    }}>
+      <TextbusEditor>
+        <Toolbar/>
+      </TextbusEditor>
+    </div>
   )
 }
 

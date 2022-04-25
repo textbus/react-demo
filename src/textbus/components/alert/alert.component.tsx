@@ -1,3 +1,6 @@
+/** @jsxRuntime classic */
+/** @jsx VElement.createElement */
+
 import {
   ComponentData,
   ComponentInstance,
