@@ -19,13 +19,15 @@ export const alertComponent = defineComponent<ComponentMethods>({
   type: ContentType.BlockComponent,
   name: 'AlertComponent',
   setup(data?: ComponentData): ComponentMethods {
-    const slots = useSlots(data?.slots || [new Slot([
+    const slots = useSlots(data?.slots || [
+      new Slot([
         ContentType.Text
       ])
     ])
 
     return {
       render(isOutputMode: boolean, slotRender: SlotRender): VElement {
+        const a = <div></div>
         return (
           <div class="alert">
             <div>这是 Alert 组件，这里的内容是不可以编辑的</div>

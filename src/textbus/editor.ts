@@ -15,11 +15,13 @@ defaultComponentLoaders.push(alertComponentLoader)
 defaultComponentLoaders.unshift(alertComponentLoader)
 defaultTools.push([alertTool])
 export function createTextbusEditor(host: HTMLElement) {
-  return createEditor(host, {
+  const editor = createEditor({
     plugins: [
       new AtPlugin(),
       new LinkJumpTipPlugin(),
       new Toolbar(defaultTools)
     ]
   })
+  editor.mount(host)
+  return editor
 }
