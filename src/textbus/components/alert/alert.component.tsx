@@ -1,8 +1,7 @@
-/** @jsxRuntime classic */
-/** @jsx VElement.createElement */
+/** @jsxImportSource @textbus/core */
 
 import {
-  ComponentData,
+  ComponentInitData,
   ComponentInstance,
   ComponentExtends,
   ContentType,
@@ -18,7 +17,7 @@ import { Injector } from '@tanbo/di'
 export const alertComponent = defineComponent<ComponentExtends>({
   type: ContentType.BlockComponent,
   name: 'AlertComponent',
-  setup(data?: ComponentData): ComponentExtends {
+  setup(data?: ComponentInitData): ComponentExtends {
     const slots = useSlots(data?.slots || [
       new Slot([
         ContentType.Text
@@ -27,7 +26,6 @@ export const alertComponent = defineComponent<ComponentExtends>({
 
     return {
       render(isOutputMode: boolean, slotRender: SlotRender): VElement {
-        const a = <div></div>
         return (
           <div class="alert">
             <div>这是 Alert 组件，这里的内容是不可以编辑的</div>
@@ -44,7 +42,6 @@ export const alertComponent = defineComponent<ComponentExtends>({
 })
 
 export const alertComponentLoader: ComponentLoader = {
-  component: alertComponent,
   resources: {
     styles: [
       `.alert { border-radius: 3px; border: 1px solid #ccc; background: #eee; padding: 5px 15px}`

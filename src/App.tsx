@@ -4,7 +4,6 @@ import { TextbusEditor } from './editor/textbus-editor';
 import { Toolbar } from './toolbar/toolbar';
 
 function App() {
-  const test = undefined
   return (
     <div style={{
       width: '800px',
