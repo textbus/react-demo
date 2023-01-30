@@ -16,7 +16,7 @@ export function TextbusEditor(props: EditorProps) {
     if (editorContainer.current) {
       const editor = createTextbusEditor(editorContainer.current!)
       editor.onReady.subscribe(() => {
-        setInjector(editor.injector!)
+        setInjector(editor)
       })
     }
   }, [editorContainer])
