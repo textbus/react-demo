@@ -50,7 +50,7 @@ export function ParagraphView(props: ViewComponentProps<typeof paragraphComponen
   const adapter = useReactContext(AdapterContext)
   return (
     adapter.slotRender(slot, children => {
-      return createVNode('p', { ref: props.rootRef }, children)
+      return createVNode('p', { ref: props.rootRef, 'data-component': paragraphComponent.name }, children)
     })
   )
 }
