@@ -9,12 +9,10 @@ export function RootComponentView(props: ViewComponentProps<typeof rootComponent
   const slot = props.component.slots.first
   const adapter = useReactContext(AdapterContext)
   return (
-    <div data-component={rootComponent.name} data-textbus-document='true'>
+    <div ref={props.rootRef as any} data-component={rootComponent.name} data-textbus-document='true'>
       {
         adapter.slotRender(slot, children => {
-          return createVNode('div', {
-            ref: props.rootRef
-          }, children)
+          return createVNode('div', null, children)
         })
       }
     </div>
