@@ -24,7 +24,7 @@ export function RootComponentView(props: ViewComponentProps<typeof rootComponent
 export const rootComponent = defineComponent({
   name: 'RootComponent',
   type: ContentType.BlockComponent,
-  validate(initData) {
+  validate(textbus, initData) {
     return {
       slots: [
         initData?.slots?.[0] || new Slot([

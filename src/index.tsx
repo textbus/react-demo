@@ -3,10 +3,12 @@ import { Textbus } from '@textbus/core'
 import { createRoot } from 'react-dom/client'
 import { Adapter } from '@textbus/adapter-react'
 
+
 import './index.css'
 import { rootComponent, RootComponentView } from './components/root';
 import { paragraphComponent, ParagraphView } from './components/paragraph';
 import { AdapterContext } from './adapter-context';
+import { createPortal } from 'react-dom';
 
 
 // 实例化 React 适配器
@@ -23,8 +25,11 @@ const adapter = new Adapter({
   }
 })
 // 实例化浏览器模块
-const browserModule = new BrowserModule(document.getElementById('root')!, {
+const browserModule = new BrowserModule({
   adapter, // 添加 React 适配器
+  renderTo(): HTMLElement {
+    return document.getElementById('root')!
+  }
 })
 // 实例化 Textbus
 const textbus = new Textbus({

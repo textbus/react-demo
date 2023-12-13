@@ -17,7 +17,7 @@ import { AdapterContext } from '../adapter-context';
 export const paragraphComponent = defineComponent({
   name: 'ParagraphComponent',
   type: ContentType.BlockComponent,
-  validate(initData) {
+  validate(textbus, initData) {
     return {
       slots: [
         initData?.slots?.[0] || new Slot([
