@@ -1,21 +1,20 @@
 import { BrowserModule } from '@textbus/platform-browser'
-import { Textbus } from '@textbus/core'
+import { ContentType, Slot, Textbus } from '@textbus/core'
 import { createRoot } from 'react-dom/client'
-import { Adapter } from '@textbus/adapter-react'
+import { ReactAdapter } from '@textbus/adapter-react'
 
 
 import './index.css'
-import { rootComponent, RootComponentView } from './components/root';
-import { paragraphComponent, ParagraphView } from './components/paragraph';
+import { RootComponent, RootComponentView } from './components/root';
+import { ParagraphComponent, ParagraphView } from './components/paragraph';
 import { AdapterContext } from './adapter-context';
-import { createPortal } from 'react-dom';
 
 
 // 实例化 React 适配器
-const adapter = new Adapter({
+const adapter = new ReactAdapter({
   // 添加渲染组件映射关系
-  [rootComponent.name]: RootComponentView,
-  [paragraphComponent.name]: ParagraphView
+  [RootComponent.componentName]: RootComponentView,
+  [ParagraphComponent.componentName]: ParagraphView
 }, (host, root) => {
   // 使用 React 渲染 Textbus 视图
   const app = createRoot(host)
@@ -37,13 +36,13 @@ const textbus = new Textbus({
     browserModule
   ],
   components: [
-    rootComponent,
-    paragraphComponent
+    RootComponent,
+    ParagraphComponent
   ]
 })
 
 // 创建根组件实例
-const rootModel = rootComponent.createInstance(textbus)
+const rootModel = new RootComponent(textbus, {slot: new Slot([ContentType.BlockComponent])})
 
 // 使用 Textbus 启动渲染
 textbus.render(rootModel)
