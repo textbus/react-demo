@@ -42,6 +42,10 @@ export class RootComponent extends Component<RootComponentState> {
     return new RootComponent(textbus, {slot: registry.createSlot(state.slot)})
   }
 
+  getSlots() {
+    return [this.state.slot]
+  }
+
   setup() {
     const selection = useContext(Selection)
     const textbus = useContext()

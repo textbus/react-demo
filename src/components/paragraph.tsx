@@ -27,6 +27,10 @@ export class ParagraphComponent extends Component<ParagraphComponentState> {
     return new ParagraphComponent(textbus, {slot: registry.createSlot(state.slot)})
   }
 
+  getSlots() {
+    return [this.state.slot]
+  }
+
   setup() {
     const context = useContext()
     const commander = useContext(Commander)
