@@ -1,4 +1,4 @@
-import { ViewComponentProps } from '@textbus/adapter-react';
+import type { ViewComponentProps } from '@textbus/adapter-react';
 import {
   ContentType,
   createVNode,
@@ -7,7 +7,7 @@ import {
   Selection,
   Slot,
   useContext,
-  Textbus, ComponentStateLiteral, Registry
+  Textbus, type ComponentStateLiteral, Registry
 } from '@textbus/core';
 import { useContext as useReactContext } from 'react'
 
@@ -39,7 +39,7 @@ export class RootComponent extends Component<RootComponentState> {
 
   static fromJSON(textbus: Textbus, state: ComponentStateLiteral<RootComponentState>) {
     const registry = textbus.get(Registry)
-    return new RootComponent(textbus, {slot: registry.createSlot(state.slot)})
+    return new RootComponent({slot: registry.createSlot(state.slot)})
   }
 
   getSlots() {
@@ -48,7 +48,6 @@ export class RootComponent extends Component<RootComponentState> {
 
   setup() {
     const selection = useContext(Selection)
-    const textbus = useContext()
     // 监听内容插入事件
 
     onContentInsert(ev => {
@@ -62,7 +61,7 @@ export class RootComponent extends Component<RootComponentState> {
         slot.insert(ev.data.content)
 
         // 创建新的段落组件，并把插槽传给段落组件
-        const p = new ParagraphComponent(textbus, {
+        const p = new ParagraphComponent({
           slot
         })
         // 在 rootComponent 的插槽内插入新段落

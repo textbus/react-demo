@@ -42,7 +42,7 @@ const textbus = new Textbus({
 })
 
 // 创建根组件实例
-const rootModel = new RootComponent(textbus, {slot: new Slot([ContentType.BlockComponent])})
+const rootModel = new RootComponent({slot: new Slot([ContentType.BlockComponent])})
 
 // 使用 Textbus 启动渲染
 textbus.render(rootModel)

@@ -1,4 +1,4 @@
-import { ViewComponentProps } from '@textbus/adapter-react';
+import type { ViewComponentProps } from '@textbus/adapter-react';
 import {
   Commander,
   ContentType,
@@ -8,7 +8,7 @@ import {
   Selection,
   Slot,
   useContext,
-  Textbus, ComponentStateLiteral, Registry
+  Textbus, type ComponentStateLiteral, Registry
 } from '@textbus/core';
 import { useContext as useReactContext } from 'react'
 import { AdapterContext } from '../adapter-context'
@@ -24,7 +24,7 @@ export class ParagraphComponent extends Component<ParagraphComponentState> {
 
   static fromJSON(textbus: Textbus, state: ComponentStateLiteral<ParagraphComponentState>) {
     const registry = textbus.get(Registry)
-    return new ParagraphComponent(textbus, {slot: registry.createSlot(state.slot)})
+    return new ParagraphComponent({slot: registry.createSlot(state.slot)})
   }
 
   getSlots() {
@@ -32,20 +32,17 @@ export class ParagraphComponent extends Component<ParagraphComponentState> {
   }
 
   setup() {
-    const context = useContext()
     const commander = useContext(Commander)
     const selection = useContext(Selection)
 
     onBreak(ev => {
       ev.preventDefault()
       const nextContent = ev.target.cut(ev.data.index)
-      const p = new ParagraphComponent(context, {
+      const p = new ParagraphComponent({
         slot: nextContent
       })
       commander.insertAfter(p, this)
-      this.textbus.nextTick(() => {
-        selection.selectFirstPosition(p)
-      })
+      selection.selectFirstPosition(p)
     })
   }
 }

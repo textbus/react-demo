@@ -16,4 +16,5 @@ code {
   border: 1px solid #ccc;
   width: 600px;
   margin: 40px auto;
+  min-height: 60px;
 }
